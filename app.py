@@ -1,1 +1,1 @@
-hello app 
+print ("Hello app")

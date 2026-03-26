@@ -1,0 +1,20 @@
+.heatmap-grid {
+    display: grid;
+    /* 53 columns for weeks, 7 rows for days */
+    grid-template-columns: repeat(53, 15px); 
+    grid-template-rows: repeat(7, 15px);
+    gap: 3px;
+    padding: 20px;
+}
+
+.day-box {
+    width: 15px;
+    height: 15px;
+    background-color: #ebedf0; /* Empty gray color */
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.day-box.productive {
+    background-color: #39d353; /* GitHub green */
+}

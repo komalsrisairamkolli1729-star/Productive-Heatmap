@@ -1,4 +1,17 @@
+# Python environment
 venv/
+env/
 __pycache__/
+*.pyc
+
+# Database (Keep your data private!)
 *.db
+sqlite3/
+
+# Secrets and Config
 .env
+instance/
+
+# OS generated files
+.DS_Store
+Thumbs.db

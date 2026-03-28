@@ -1,15 +1,35 @@
 const grid = document.getElementById('grid-container');
 
-// Create 365 boxes (approx 1 year)
-for (let i = 0; i < 365; i++) {
-    const box = document.createElement('div');
-    box.classList.add('day-box');
-
-    // Add click event to toggle productivity
-    box.addEventListener('click', () => {
-        box.classList.toggle('productive');
-        console.log(`Day ${i+1} clicked!`);
+// 1. Load existing data from Python when page opens
+fetch('/get_data')
+    .then(res => res.json())
+    .then(savedDays => {
+        renderGrid(savedDays);
     });
 
-    grid.appendChild(box);
+function renderGrid(savedDays) {
+    for (let i = 0; i < 365; i++) {
+        const box = document.createElement('div');
+        box.classList.add('day-box');
+
+        // If this day was saved as productive, make it green
+        if (savedDays.includes(i)) {
+            box.classList.add('productive');
+        }
+
+        box.addEventListener('click', () => {
+            const isProductive = box.classList.toggle('productive');
+            
+            // Send data to Python
+            fetch('/log_productivity', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    day_id: i,
+                    status: isProductive ? 'productive' : 'empty'
+                })
+            });
+        });
+        grid.appendChild(box);
+    }
 }

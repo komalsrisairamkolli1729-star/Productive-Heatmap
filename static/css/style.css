@@ -16,5 +16,5 @@
 }
 
 .day-box.productive {
-    background-color: #39d353; /* GitHub green */
+    background-color: hsl(0, 0%, 0%); /* black*/
 }
